@@ -132,13 +132,15 @@ Because requesting items from a remote data source might take some time, you hav
 
 ## Item size
 
-The size of each item in pixels can be set with <xref:Microsoft.AspNetCore.Components.Web.Virtualization.Virtualize%601.ItemSize%2A?displayProperty=nameWithType> (default: 50):
+The size of each item in pixels can be set with <xref:Microsoft.AspNetCore.Components.Web.Virtualization.Virtualize%601.ItemSize%2A?displayProperty=nameWithType> (the default is 50):
 
 ```razor
 <Virtualize Context="employee" Items="@employees" ItemSize="25">
     ...
 </Virtualize>
 ```
+
+By default, the `Virtualize` component measures the actual rendering size *after* the initial render occurs. Use `ItemSize` to provide an exact item size in advance to assist with accurate initial render performance and to ensure the correct scroll position for page reloads. For example, if the default `ItemSize` causes some items to render outside of the currently visible view, a second re-render will be triggered. To correctly maintain the browser's scroll position in a virtualized list, the initial render must be correct. If not, users might view the wrong items.  
 
 ## Overscan count
 
